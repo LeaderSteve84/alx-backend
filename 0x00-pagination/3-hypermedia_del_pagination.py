@@ -40,4 +40,22 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        pass
+        """get hyper_index"""
+        assert isinstance(index, int) and isinstance(page_size, int)
+        assert 0 <= index < len(self.indexed_dataset())
+
+        datas = []
+        nextIndex = index + page_size
+        for x in range(index, nextIndex):
+            if self.indexed_dataset().get(x):
+                datas.append(self.indexed_dataset()[x])
+            else:
+                x += 1
+                nextIndex += 1
+
+            return {
+                "data": datas,
+                "index": index,
+                "next_index": nextIndex,
+                "page_size": page_size
+            }
