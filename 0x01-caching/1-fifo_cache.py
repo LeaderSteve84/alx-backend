@@ -32,7 +32,7 @@ class FIFOCache(BaseCaching):
 
     def get(self, key):
         """returns value in self.cache_dat linked to key"""
-        return self.cache_data(key, None)
+        return self.cache_data.get(key, None)
 
     def migrate_to_last(self, key):
         """move an element"""
