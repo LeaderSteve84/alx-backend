@@ -4,7 +4,16 @@ from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
-    """LRU Cache"""
+    """
+    A class that represents a cache with least
+    recently used (LRU) strategy.
+
+    Attributes:
+        cache_data (dict): The cache data stored
+        as a key-value pairs.
+        stack (list): A list that stores the keys
+        in the order of their usage.
+    """
 
     def __init__(self):
         """object constructor"""
