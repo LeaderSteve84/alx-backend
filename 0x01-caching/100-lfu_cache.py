@@ -60,7 +60,7 @@ class LFUCache(BaseCaching):
 
         idexV = self.stack.index(item)
         itemCount = self.stackCount[item]
-        
+
         for x in range(idexV, length):
             if x != (length - 1):
                 nx = self.stack[x + 1]
