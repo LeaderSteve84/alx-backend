@@ -16,17 +16,17 @@ class LIFOCache(BaseCaching):
         if key is None or item is None:
             return
 
-        if key not in self.stack:
-            self.stack.append(key)
-        else:
-            self.migrate_to_last(key)
-
         self.cache_data[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             discard_d = self.stack.pop()
             del self.cache_data[discard_d]
             print("DISCARD: {}". format(discard_d))
+
+        if key not in self.stack:
+            self.stack.append(key)
+        else:
+            self.migrate_to_last(key)
 
     def get(self, key):
         """returns value in self.cache_dat linked to key"""
