@@ -13,8 +13,8 @@
         {% else %}
         <p>{{ _('not_logged_in') }}</p>
         {% endif %}
-	{% if g.current_time %}
-        <p>{{ _('current_time_is', current_time=g.current_time) }}</p>
+	{% if time %}
+        <p>{{ _('current_time_is', current_time=time) }}</p>
         {% endif %}
      </header>
   </body>

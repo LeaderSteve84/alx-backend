@@ -8,6 +8,7 @@ from flask import Flask, g, render_template, request
 from flask_babel import Babel
 import pytz
 from pytz.exceptions import UnknownTimeZoneError
+from datetime import datetime
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -104,10 +105,21 @@ def before_request():
 @app.route('/', methods=['GET'], strict_slashes=False)
 def home_route() -> str:
     """route to home page"""
+    # get the user's timezone
+    tz = get_timezone()
+    if tz is None:
+        tz = 'UTC'
+
+    # Get the current time in the user's timezone
+    now = datetime.now(pytz.timezone(tz))
+
+    # Format the time
+    time_str = now.strftime('%b %d, %Y, %I:%M:%S %p')
+
     if g.user is None:
-        return render_template('index.html')
+        return render_template('index.html', time=timestr)
     else:
-        return render_template('index.html', user=g.user)
+        return render_template('index.html', user=g.user, time=timestr)
 
 
 if __name__ == "__main__":
