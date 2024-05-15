@@ -64,7 +64,10 @@ def before_request():
 @app.route('/', methods=['GET'], strict_slashes=False)
 def home_route() -> str:
     """route to home page"""
-    return render_template('4-index.html')
+    if g.user is None:
+        return render_template('5-index.html')
+    else:
+        return render_template('5-index.html', user=g.user)
 
 
 if __name__ == "__main__":
