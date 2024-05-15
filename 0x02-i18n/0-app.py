@@ -9,6 +9,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
 def home_route() -> str:
     """route to home page"""
