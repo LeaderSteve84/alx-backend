@@ -17,6 +17,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 class Config(object):
     """class for the configuration for babel"""
     LANGUAGES = ['en', 'fr']
@@ -39,6 +40,7 @@ def get_locale() -> str:
         else:
             return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 def get_user():
     """returns a user dictionary
     or None if the ID cannot be found
@@ -49,6 +51,7 @@ def get_user():
         return users.get(int(USERid))
     return None
 
+
 @app.before_request
 def before_request():
     """
@@ -56,6 +59,7 @@ def before_request():
     because of the preceeding decorator
     """
     g.user = get_user()
+
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def home_route() -> str:
